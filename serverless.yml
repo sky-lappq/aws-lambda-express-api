@@ -1,0 +1,17 @@
+service: aws-node-express-api-project
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-northeast-1
+  profile: sls
+
+functions:
+  api:
+    handler: dist/app.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-offline
