@@ -2,19 +2,20 @@ import serverless from 'serverless-http';
 import express from 'express';
 import { config } from 'dotenv';
 
+import userRouter from "./user/userRouter"
+
 config();
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Setup routing / controler
+app.use("/user", userRouter);
 
 app.get('/', (req, res, next) => {
   return res.status(200).json({
-    message: 'Hello from root 333! ' + process.env.DB_URL,
-  });
-});
-
-app.get('/path', (req, res, next) => {
-  return res.status(200).json({
-    message: 'Hello from path!',
+    status: 'Health check success!!!' + process.env.DB_URL,
   });
 });
 
