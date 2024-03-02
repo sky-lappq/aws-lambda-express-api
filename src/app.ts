@@ -3,6 +3,7 @@ import express from 'express';
 import { config } from 'dotenv';
 
 import userRouter from "./user/userRouter"
+import adminRouter from './admin/adminRouter';
 
 config();
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Setup routing / controler
 app.use("/user", userRouter);
+app.use("/admin", adminRouter);
 
 app.get('/', (req, res, next) => {
   return res.status(200).json({
